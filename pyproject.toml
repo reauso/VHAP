@@ -44,3 +44,27 @@ authors = [
 
 description = "A complete head tracking pipeline from videos to NeRF-ready datasets."
 readme = "README.md"
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["linux-64", "win-64"]
+
+[tool.pixi.dependencies]
+pixi-pycharm = "*"
+
+[tool.pixi.pypi-dependencies]
+
+[tool.pixi.environments]
+test = ["test"]
+
+[tool.pixi.feature.test.dependencies]
+pytest = "*"
+coverage = "*"
+parameterized = "*"
+
+[tool.pixi.feature.test.tasks]
+test = "coverage run -m pytest"
+coverage = { cmd = [
+    "coverage", "report",
+    "&&", "coverage", "html"
+], depends-on = ["test"] }
